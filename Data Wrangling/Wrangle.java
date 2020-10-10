@@ -11,9 +11,14 @@ public class Wrangle {
 
     String filename = "Final.csv";
    File file = new File(filename);
-    Record records[] = new Record[58]; //Very important variable to be used by the back-end
+    Record records[] = new Record[58]; //Variable will be returned by the load function.
+	
+     /**
+     * The load function extracts data from the csv file.
+     * @return an array of Records 
+     */
     
-	public void load() {
+     public Record[] load() {
 		
 
       int flag = 0;
@@ -33,17 +38,9 @@ public class Wrangle {
       {
     	  e.printStackTrace();
       }
-      
+      return records;
 	}
 	
-	public static void main(String args[])
-	{
-		Wrangle w = new Wrangle();
-		w.load();
-		
-		
-	}
-
 }
 
 
