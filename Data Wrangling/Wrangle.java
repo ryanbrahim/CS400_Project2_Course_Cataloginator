@@ -3,22 +3,31 @@ import java.util.*;
 
 
 /**
- * records[] variable is very important for backend. The size is 58.
- *  load functions extracts code from a csv file
- *
+ * A demo way to use this class in an external function would be:
+ * Wrangle w = new Wrangle("Final.csv");
+		List <Record> a = w.load();
+		for (Record record: a) 
+		{
+			System.out.println(record.number+" -- "+record.description);
+		}
+ * 
  */
 public class Wrangle {
 
-    String filename = "Final.csv";
-   File file = new File(filename);
-    Record records[] = new Record[58]; //Variable will be returned by the load function.
-	
-     /**
+    String filename;
+   File file;
+    List <Record> records; 
+    Wrangle(String filename)
+    {
+    	this.filename = filename; 
+    	file = new File(filename);
+    	records = new ArrayList <Record>();
+    }
+    /**
      * The load function extracts data from the csv file.
-     * @return an array of Records 
+     * @return a list of records
      */
-    
-     public Record[] load() {
+	public List<Record> load() {
 		
 
       int flag = 0;
@@ -28,9 +37,11 @@ public class Wrangle {
     	String data = input.next();
     	while(input.hasNext())
     	{
+    		Record temp;
     		data = input.next();
     		String [] cols = data.split(",");
-    		records[flag++] = new Record(Integer.parseInt(cols[0]),cols[1]); //Instantiating records object
+    		temp = new Record(Integer.parseInt(cols[0]),cols[1]); //Instantiating records object
+    		records.add(temp);
     	}
     	  
       }
@@ -40,7 +51,9 @@ public class Wrangle {
       }
       return records;
 	}
+
 	
+
 }
 
 
