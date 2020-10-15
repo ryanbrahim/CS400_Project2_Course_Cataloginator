@@ -11,6 +11,10 @@ import data_wrangling.Course;
 public class CourseCatalog implements Catalog<Integer, Course>
 {
 
+  /**
+   * Inserts a given key/value into the catalog
+   * @returns true if successfully inserted, false if it is a duplicate
+   */
   @Override
   public boolean insert(Integer key, Course value)
   {
