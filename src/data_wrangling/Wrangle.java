@@ -1,3 +1,5 @@
+package data_wrangling;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -43,6 +45,11 @@ public class Wrangle {
 			return null;
 		}
 
+	}
+	
+	public boolean hasNextCourse()
+	{
+	  return this.input.hasNext();
 	}
 
 }

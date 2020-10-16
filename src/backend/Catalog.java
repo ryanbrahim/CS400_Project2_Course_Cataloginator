@@ -22,12 +22,10 @@ public interface Catalog<K,V>
   V get(K key);
   
   /**
-   * Removes the corresponding key/value pair from the catalog
-   * @param key - the given key
-   * @returns the corresponding value null if does not exist in catalog
+   * 
+   * @param key
+   * @return true if the key
    */
-  V remove(K key);
-  
-
+  boolean contains(K key);
 
 }

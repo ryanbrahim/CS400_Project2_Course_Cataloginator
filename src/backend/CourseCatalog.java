@@ -1,10 +1,7 @@
 package backend;
 
-import BST.Node;
-import BST.Traverser;
+import java.io.FileNotFoundException;
 import data_wrangling.*;
-
-
 
 /**
  * An implementation of Catalog for Courses using course numbers as keys
@@ -15,10 +12,12 @@ public class CourseCatalog implements Catalog<Integer, Record>
 {
   
   private RedBlackTree<Record> tree;
+  private int size;
   
-  public CourseCatalog(String filename)
+  public CourseCatalog(String filename) throws FileNotFoundException
   {
     Wrangle data = new Wrangle(filename);
+    this.load(data);
   }
 
   /**
@@ -52,14 +51,25 @@ public class CourseCatalog implements Catalog<Integer, Record>
     
     return null;
   }
-
-  @Override
-  public Record remove(Integer key)
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
   
+  public boolean contains(Integer courseNumber)
+  {
+    return false;
+  }
+
+  /**
+   * Helper method to iterates through file, inserts into RBTree
+   * @param data - Wrangle object
+   */
+  private void load(Wrangle data)
+  {
+    Record nextCourse;
+    while(data.hasNextCourse())
+    {
+      nextCourse = data.nextCourse();
+      tree.insert(nextCourse);
+    }
+  }
   
 
 }
