@@ -17,6 +17,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
   public CourseCatalog(String filename) throws FileNotFoundException
   {
     Wrangle data = new Wrangle(filename);
+    this.tree = new RedBlackTree<Record>();
     this.load(data);
   }
 
@@ -54,6 +55,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
   
   public boolean contains(Integer courseNumber)
   {
+    
     return false;
   }
 
@@ -63,21 +65,43 @@ public class CourseCatalog implements Catalog<Integer, Record>
    */
   private void load(Wrangle data)
   {
-    Record nextCourse;
+    Record nextCourse = null;
     while(data.hasNextCourse())
     {
       nextCourse = data.nextCourse();
       tree.insert(nextCourse);
+      this.size++;
     }
+  }
+  
+  /**
+   * Getter method for the size of the CourseCatalog
+   * 
+   * @return the current size of the CourseCatalog
+   */
+  public int getSize()
+  {
+    return this.size;
   }
   
   /**
    * Main method to run some small tests
    * @param args
    */
-  public void main(String[] args)
+  public static void main(String[] args)
   {
-    CourseCatalog catalog = new CourseCatalog();
+    try
+    {
+      CourseCatalog catalog = new CourseCatalog("src/Final.csv");
+      System.out.println(catalog.tree.toString());
+      System.out.println(catalog.size);
+    }
+    catch (FileNotFoundException e)
+    {
+      e.printStackTrace();
+    }
+    
+    
   }
   
 

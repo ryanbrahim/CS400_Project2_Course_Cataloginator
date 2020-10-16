@@ -24,5 +24,11 @@ public class Record implements Comparable<Record> {
 		else
 			return -1;
 	}
+	
+	@Override
+	public String toString()
+	{
+	  return "(" + number + ")";
+	}
 
 }
