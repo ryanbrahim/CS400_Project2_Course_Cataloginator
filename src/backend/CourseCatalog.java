@@ -1,8 +1,6 @@
 package backend;
 
 import java.io.FileNotFoundException;
-import BST.Node;
-import BST.Traverser;
 import data_wrangling.*;
 
 /**
@@ -13,13 +11,13 @@ import data_wrangling.*;
 public class CourseCatalog implements Catalog<Integer, Record>
 {
   
-  private RedBlackTree<Record> tree;
+  private TraversalTree tree;
   private int size;
   
   public CourseCatalog(String filename) throws FileNotFoundException
   {
     Wrangle data = new Wrangle(filename);
-    this.tree = new RedBlackTree<Record>();
+    this.tree = new TraversalTree();
     this.load(data);
   }
 

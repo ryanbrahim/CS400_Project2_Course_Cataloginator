@@ -1,6 +1,6 @@
 package backend;
 
-import data_wrangling.Record;
+import data_wrangling.*;
 
 public class TraversalTree extends RedBlackTree<Record>
 {
