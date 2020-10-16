@@ -1,5 +1,7 @@
 package backend;
 
+import BST.Node;
+import BST.Traverser;
 import data_wrangling.*;
 
 
@@ -38,10 +40,16 @@ public class CourseCatalog implements Catalog<Integer, Record>
     return true;
   }
 
+  /**
+   * Gets the Course for a corresponding courseNumber
+   * 
+   * @param courseNumber - the given courseNumber
+   * @returns the corresponding Course, null if does not exist in catalog
+   */
   @Override
-  public Record get(Integer key)
+  public Record get(Integer courseNumber)
   {
-    // TODO Auto-generated method stub
+    
     return null;
   }
 
@@ -51,5 +59,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
     // TODO Auto-generated method stub
     return null;
   }
+  
+  
 
 }
