@@ -6,10 +6,10 @@ package data_wrangling;
  *
  */
 public class Record implements Comparable<Record> {
-	int number;
-	String description;
+	public int number;
+	public String description;
 
-	Record(int n, String d) {
+	public Record(int n, String d) {
 		number = n; // Course number
 		description = d; // Course description
 

@@ -1,6 +1,8 @@
 package backend;
 
 import java.io.FileNotFoundException;
+import BST.Node;
+import BST.Traverser;
 import data_wrangling.*;
 
 /**
