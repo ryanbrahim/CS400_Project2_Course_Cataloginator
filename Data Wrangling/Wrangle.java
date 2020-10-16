@@ -15,14 +15,12 @@ public class Wrangle {
 
 	String filename;
 	File file;
-	List<Record> records;
 	Scanner input;
 	String data;
 
 	Wrangle(String filename) throws FileNotFoundException {
 		this.filename = filename;
 		file = new File(filename);
-		records = new ArrayList<Record>();
 		input = new Scanner(file);
 		data = input.next(); // Avoids header column
 	}
