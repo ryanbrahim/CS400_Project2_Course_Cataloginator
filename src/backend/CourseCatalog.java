@@ -71,5 +71,14 @@ public class CourseCatalog implements Catalog<Integer, Record>
     }
   }
   
+  /**
+   * Main method to run some small tests
+   * @param args
+   */
+  public void main(String[] args)
+  {
+    CourseCatalog catalog = new CourseCatalog();
+  }
+  
 
 }
