@@ -26,7 +26,7 @@ public class Wrangle {
 	}
 
 	/**
-	 * The load function extracts data from the csv file.
+	 * The Record function extracts one record at a time. 
 	 * 
 	 * @return Record object
 	 */
