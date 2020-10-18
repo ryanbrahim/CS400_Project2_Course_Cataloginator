@@ -1,4 +1,3 @@
 # CS400_Project2_Course_Cataloginator
 
-One suggestion, just download everything in the repo. Then on your desktop you could use the appropriate folder.
-If anyone else has a better idea, then edit this README. 
+What you're are seeing is the contents of the entire eclipse project.  You can find your files in the src folder.  Please keep all of your files in their own package named after your role.
