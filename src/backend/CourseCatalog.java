@@ -49,14 +49,13 @@ public class CourseCatalog implements Catalog<Integer, Record>
   @Override
   public Record get(Integer courseNumber)
   {
-    
-    return null;
+    return tree.get(courseNumber);
   }
   
   public boolean contains(Integer courseNumber)
   {
     
-    return false;
+    return tree.contains(courseNumber);
   }
 
   /**
@@ -95,13 +94,15 @@ public class CourseCatalog implements Catalog<Integer, Record>
       CourseCatalog catalog = new CourseCatalog("src/Final.csv");
       System.out.println(catalog.tree.toString());
       System.out.println(catalog.size);
+      System.out.println(catalog.contains(300));
+      System.out.println(catalog.get(300).description);
+      System.out.println(catalog.contains(1));
+      System.out.println(catalog.get(1));
     }
     catch (FileNotFoundException e)
     {
       e.printStackTrace();
     }
-    
-    
   }
   
 
