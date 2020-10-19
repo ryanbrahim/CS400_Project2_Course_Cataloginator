@@ -12,7 +12,7 @@ import backend.Catalog.Traverser;
 import data_wrangling.*;
 
 /**
- * An extension of the RedBlackTree in order to implement traversal functionality + get
+ * An extension of the RedBlackTree in order to implement traversal + get + contains functionality
  * 
  * @author Ryan Almizyed
  */
