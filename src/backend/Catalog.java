@@ -8,6 +8,8 @@
 // Notes to Grader: <optional extra notes>
 package backend;
 
+import backend.TraversalTree.Traverser;
+
 /**
  * Defines an interface for accessing a catalog
  * 
@@ -35,5 +37,12 @@ public interface Catalog<K,V>
    * @return true if the key
    */
   boolean contains(K key);
+  
+  /**
+   * Starts an in-order traversal of the tree.
+   * 
+   * @param t the traverser to do the traversal with
+   */
+  public void inOrderTraversal(Traverser t);
 
 }

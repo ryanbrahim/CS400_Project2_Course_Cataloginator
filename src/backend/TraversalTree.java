@@ -13,7 +13,6 @@ import data_wrangling.*;
 /**
  * An extension of the RedBlackTree in order to implement traversal functionality + get
  * 
- * 
  * @author Ryan Almizyed
  */
 public class TraversalTree extends RedBlackTree<Record>
