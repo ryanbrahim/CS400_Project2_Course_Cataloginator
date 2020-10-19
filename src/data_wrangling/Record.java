@@ -6,29 +6,29 @@ package data_wrangling;
  *
  */
 public class Record implements Comparable<Record> {
-	public int number;
-	public String description;
+  public int number;
+  public String description;
 
-	public Record(int n, String d) {
-		number = n; // Course number
-		description = d; // Course description
+  public Record(int n, String d) {
+    number = n; // Course number
+    description = d; // Course description
 
-	}
+  }
 
-	@Override
-	public int compareTo(Record data) {
-		if (this.number > data.number)
-			return 1;
-		else if (this.number == data.number)
-			return 0;
-		else
-			return -1;
-	}
-	
-	@Override
-	public String toString()
-	{
-	  return "(" + number + ")";
-	}
+  @Override
+  public int compareTo(Record data) {
+    if (this.number > data.number)
+      return 1;
+    else if (this.number == data.number)
+      return 0;
+    else
+      return -1;
+  }
+  
+  @Override
+  public String toString()
+  {
+    return "(" + number + ")";
+  }
 
 }

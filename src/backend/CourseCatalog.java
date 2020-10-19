@@ -1,6 +1,8 @@
 package backend;
 
 import java.io.FileNotFoundException;
+import backend.RedBlackTree.Node;
+import backend.TraversalTree.Traverser;
 import data_wrangling.*;
 
 /**
@@ -8,10 +10,10 @@ import data_wrangling.*;
  * 
  * @author Ryan Almizyed
  */
-public class CourseCatalog implements Catalog<Integer, Record>
-{
+public class CourseCatalog implements Catalog<Integer, Record> 
+{  
   
-  private TraversalTree tree;
+  public TraversalTree tree;
   private int size;
   
   public CourseCatalog(String filename) throws FileNotFoundException
@@ -49,6 +51,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
   @Override
   public Record get(Integer courseNumber)
   {
+    
     return tree.get(courseNumber);
   }
   
@@ -91,18 +94,16 @@ public class CourseCatalog implements Catalog<Integer, Record>
   {
     try
     {
-      CourseCatalog catalog = new CourseCatalog("src/Final.csv");
+      CourseCatalog catalog = new CourseCatalog("Final.csv");
       System.out.println(catalog.tree.toString());
       System.out.println(catalog.size);
-      System.out.println(catalog.contains(300));
-      System.out.println(catalog.get(300).description);
-      System.out.println(catalog.contains(1));
-      System.out.println(catalog.get(1));
     }
     catch (FileNotFoundException e)
     {
       e.printStackTrace();
     }
+    
+    
   }
   
 

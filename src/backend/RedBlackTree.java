@@ -1,12 +1,13 @@
-package backend;
-
 // --== CS400 File Header Information ==--
-// Name: Ryan Almizyed
-// Email: almizyed@wisc.edu
+// Name: Bailey Hurlburt
+// Email: bhurlburt@wisc.edu
 // Team: MG
 // TA: Harit
-// Lecturer: Florian
-// Notes to Grader: <optional extra notes>
+// Lecturer: Gary Dahl
+// Notes to Grader: <optional extra notes> 
+
+package backend;
+
 import java.util.LinkedList;
 
 /**
@@ -14,23 +15,20 @@ import java.util.LinkedList;
  * binary search tree. You can use this class' insert method to build a binary search tree, and its
  * toString method to display the level order (breadth first) traversal of values in that tree.
  */
-public class RedBlackTree<T extends Comparable<T>>
-{
+public class RedBlackTree<T extends Comparable<T>> {
 
   /**
    * This class represents a node holding a single value within a binary tree the parent, left, and
    * right child references are always be maintained.
    */
-  protected static class Node<T>
-  {
+  protected static class Node<T> {
     public T data;
-    public boolean isBlack;
     public Node<T> parent; // null for root node
     public Node<T> leftChild;
     public Node<T> rightChild;
+    public boolean isBlack;
 
-    public Node(T data)
-    {
+    public Node(T data) {
       this.data = data;
       this.isBlack = false;
     }
@@ -39,18 +37,8 @@ public class RedBlackTree<T extends Comparable<T>>
      * @return true when this node has a parent and is the left child of that parent, otherwise
      *         return false
      */
-    public boolean isLeftChild()
-    {
+    public boolean isLeftChild() {
       return parent != null && parent.leftChild == this;
-    }
-
-    /**
-     * @return true when this node has a parent and is the right child of that parent, otherwise
-     *         return false
-     */
-    public boolean isRightChild()
-    {
-      return !isLeftChild();
     }
 
     /**
@@ -61,26 +49,23 @@ public class RedBlackTree<T extends Comparable<T>>
      * @return string containing the values of this tree in level order
      */
     @Override
-    public String toString()
-    { // display subtree in order traversal
+    public String toString() { // display subtree in order traversal
       String output = "[";
       LinkedList<Node<T>> q = new LinkedList<>();
       q.add(this);
-      while (!q.isEmpty())
-      {
+      while (!q.isEmpty()) {
         Node<T> next = q.removeFirst();
-        if(next.leftChild != null)
+        if (next.leftChild != null)
           q.add(next.leftChild);
-        if(next.rightChild != null)
+        if (next.rightChild != null)
           q.add(next.rightChild);
         output += next.data.toString();
-        if(!q.isEmpty())
+        if (!q.isEmpty())
           output += ", ";
       }
       return output + "]";
     }
   }
-
 
   protected Node<T> root; // reference to root node of tree, null when empty
 
@@ -93,22 +78,18 @@ public class RedBlackTree<T extends Comparable<T>>
    * @throws NullPointerException     when the provided data argument is null
    * @throws IllegalArgumentException when the tree already contains data
    */
-  public void insert(T data) throws NullPointerException, IllegalArgumentException
-  {
+  public void insert(T data) throws NullPointerException, IllegalArgumentException {
     // null references cannot be stored within this tree
-    if(data == null)
+    if (data == null)
       throw new NullPointerException("This RedBlackTree cannot store null references.");
 
     Node<T> newNode = new Node<>(data);
-    if(root == null)
-    {
+    if (root == null) {
       root = newNode;
     } // add first node to an empty tree
     else
       insertHelper(newNode, root); // recursively insert into subtree
-
-    // set root to be black
-    this.root.isBlack = true;
+    root.isBlack = true;
   }
 
   /**
@@ -117,46 +98,127 @@ public class RedBlackTree<T extends Comparable<T>>
    * 
    * @param newNode is the new node that is being added to this tree
    * @param subtree is the reference to a node within this tree which the newNode should be inserted
-   *                as a descendant beneath
+   *                as a descenedent beneath
    * @throws IllegalArgumentException when the newNode and subtree contain equal data references (as
    *                                  defined by Comparable.compareTo())
    */
-  private void insertHelper(Node<T> newNode, Node<T> subtree)
-  {
+  private void insertHelper(Node<T> newNode, Node<T> subtree) {
     int compare = newNode.data.compareTo(subtree.data);
     // do not allow duplicate values to be stored within this tree
-    if(compare == 0)
+    if (compare == 0)
       throw new IllegalArgumentException("This RedBlackTree already contains that value.");
 
     // store newNode within left subtree of subtree
-    else if(compare < 0)
-    {
-      if(subtree.leftChild == null)
-      { // left subtree empty, add here
+    else if (compare < 0) {
+      if (subtree.leftChild == null) { // left subtree empty, add here
         subtree.leftChild = newNode;
         newNode.parent = subtree;
-        // enforce RBTree properties
+        // enforce RBT properties
         this.enforceRBTreePropertiesAfterInsert(newNode);
         // otherwise continue recursive search for location to insert
-      }
-      else
+      } else
         insertHelper(newNode, subtree.leftChild);
     }
 
     // store newNode within the right subtree of subtree
-    else
-    {
-      if(subtree.rightChild == null)
-      { // right subtree empty, add here
+    else {
+      if (subtree.rightChild == null) { // right subtree empty, add here
         subtree.rightChild = newNode;
         newNode.parent = subtree;
-        // enforce RBTree properties
-        this.enforceRBTreePropertiesAfterInsert(newNode);
+        // enforce RBT properties
+        enforceRBTreePropertiesAfterInsert(newNode);
         // otherwise continue recursive search for location to insert
-      }
-      else
+      } else
         insertHelper(newNode, subtree.rightChild);
     }
+  }
+
+  /**
+   * Recursive method that makes sure that the properties of the RBT stay intact.
+   * 
+   * @param newRedNode
+   */
+  private void enforceRBTreePropertiesAfterInsert(Node<T> newRedNode) {
+
+    Node<T> uncle = null;
+    boolean sameSideAsNode = false;
+
+    // find the parent's sibling
+    if (newRedNode.parent.isLeftChild()) {
+      if (newRedNode.parent.parent.rightChild == null) {
+        uncle = null;
+      } 
+      else {
+        uncle = newRedNode.parent.parent.rightChild;
+      }
+      // determine if uncle is on same side as newRedNode
+      if (!newRedNode.isLeftChild()) {
+        sameSideAsNode = true;
+      }
+    }
+    else if (newRedNode.parent.parent == null) {
+      uncle = null;
+    } 
+    else {
+      if (newRedNode.parent.parent.leftChild == null) {
+        uncle = null;
+      } 
+      else {
+        uncle = newRedNode.parent.parent.leftChild;
+      }
+      // determine if uncle is on same side as newRedNode
+      if (newRedNode.isLeftChild()) {
+        sameSideAsNode = true;
+      }
+    }
+
+    // return tree if parent is black
+    if (newRedNode.parent.isBlack == true) {
+      return;
+    }
+
+    //Do cases if uncle is not null
+    if (uncle != null) {
+      // check if parent's sibling is red - case 1
+      if (uncle.isBlack == false) {
+        newRedNode.parent.isBlack = true;
+        uncle.isBlack = true;
+        uncle.parent.isBlack = false;
+        if (uncle.parent.parent != null) {
+          enforceRBTreePropertiesAfterInsert(uncle.parent);
+        }
+      }
+      // check if parent's sibling is black and on opposite size as newRedNode - case 2
+      else if ((uncle.isBlack == true || uncle == null) && sameSideAsNode == false) {
+        newRedNode.parent.isBlack = true;
+        newRedNode.parent.parent.isBlack = false;
+        rotate(newRedNode.parent, newRedNode.parent.parent);
+      }
+      // check if parent's sibling is black and on same side as newRedNode - case 3
+      else if ((uncle.isBlack == true || uncle == null) && sameSideAsNode == true) {
+        rotate(newRedNode, newRedNode.parent);
+        newRedNode.isBlack = true;
+        newRedNode.parent.isBlack = false;
+        rotate(newRedNode, newRedNode.parent);
+      }
+    }
+    //Do cases if uncle is null
+    else {
+      // check if parent's sibling is black and on opposite size as newRedNode - case 2
+      if (uncle == null && sameSideAsNode == false) {
+        newRedNode.parent.isBlack = true;
+        newRedNode.parent.parent.isBlack = false;
+        rotate(newRedNode.parent, newRedNode.parent.parent);
+      }
+      // check if parent's sibling is black and on same side as newRedNode - case 3
+      else if(uncle == null && sameSideAsNode == true) {
+        rotate(newRedNode, newRedNode.parent);
+        newRedNode.isBlack = true;
+        newRedNode.parent.isBlack = false;
+        rotate(newRedNode, newRedNode.parent);
+      }
+    }
+
   }
 
   /**
@@ -168,8 +230,7 @@ public class RedBlackTree<T extends Comparable<T>>
    * @return string containing the values of this tree in level order
    */
   @Override
-  public String toString()
-  {
+  public String toString() {
     return root.toString();
   }
 
@@ -188,163 +249,81 @@ public class RedBlackTree<T extends Comparable<T>>
    * @throws IllegalArgumentException when the provided child and parent node references are not
    *                                  initially (pre-rotation) related that way
    */
-  private void rotate(Node<T> child, Node<T> parent) throws IllegalArgumentException
-  {
-    // check if provided nodes are related to each other
-    if(!child.parent.equals(parent))
-      throw new IllegalArgumentException("The provided nodes are not related");
+  private void rotate(Node<T> child, Node<T> parent) throws IllegalArgumentException {
 
-    // rotate right
-    if(child.isLeftChild())
-    {
-      var grandparent = parent.parent;
-      // CASE: grandparent is null, parent is null
-      if(grandparent == null)
-        this.root = child;
-      // CASE: parent is leftChild of grandparent
-      else if(parent.isLeftChild())
-        this.replaceLeftChild(grandparent, child);
-      // CASE: parent is rightChild of grandparent
-      else
-        this.replaceRightChild(grandparent, child);
-
-      parent.leftChild = child.rightChild;
-
-      if(child.rightChild != null)
-        child.rightChild.parent = parent;
-
-      parent.parent = child;
-      child.rightChild = parent;
-      child.parent = grandparent;
-
-    }
-
-    // rotate left
-    else
-    {
-      var grandparent = parent.parent;
-      // CASE: grandparent is null, parent is null
-      if(grandparent == null)
-        this.root = child;
-      // CASE: parent is leftChild of grandparent
-      else if(parent.isLeftChild())
-        grandparent.leftChild = child;
-      // CASE: parent is rightChild of grandparent
-      else
-        grandparent.rightChild = child;
-
-      parent.rightChild = child.leftChild;
-
-      if(child.leftChild != null)
-        child.leftChild.parent = parent;
-
-      parent.parent = child;
-      child.leftChild = parent;
-      child.parent = grandparent;
-
-    }
-  }
-
-  private void enforceRBTreePropertiesAfterInsert(Node<T> node)
-  {
-    // get the node's parent, grandparent, and uncle nodes
-    Node<T> parent = node.parent;
-    Node<T> grandparent = this.getGrandparent(node);
-    Node<T> uncle = this.getUncle(node);
-
-    // CASE: node is tree's root
-    if(parent == null)
-    {
-      // make root black
-      node.isBlack = true;
-      return;
-    }
-    // CASE: parent is already black
-    if(parent.isBlack)
-      return;
-    // CASE: parent and uncle are both red
-    if(uncle != null && !uncle.isBlack)
-    {
-      parent.isBlack = true; // set parent and uncle to black
-      uncle.isBlack = true;
-      grandparent.isBlack = false; // set grandparent to red
-      // recursively rebalance rest of the tree upwards
-      enforceRBTreePropertiesAfterInsert(grandparent);
-      return;
-    }
-    /* CASE: node is parent's right child, and parent is grandparent's 
-     * left child => rotate left at parent */
-    if(node.equals(parent.rightChild) && parent.equals(grandparent.leftChild))
-      rotate(node, parent);
-    /* CASE: node is parent's left child, and parent is grandparent's 
-     * right child => rotate right at parent */
-    else if(node.equals(parent.leftChild) && parent.equals(grandparent.rightChild))
-      rotate(node, parent);
-    // Color parent black and grandparent red
-    parent.isBlack = true;
-    grandparent.isBlack = false;
-    // rotate at grandparent
-    rotate(parent, grandparent);
-
-  }
-
-  /**
-   * Replaces the left child of a given parent node to a different child node
-   * 
-   * @param parent   - the given parent node
-   * @param newChild - the node to replace with
-   */
-  private void replaceLeftChild(Node<T> parent, Node<T> newChild)
-  {
-    if(parent != null)
-    {
-      parent.leftChild = newChild;
-      newChild.parent = parent;
+    // Check if the child is either the left or right child of the given parent
+    if (child.isLeftChild()) {
+      rightRotate(child, parent);
+    } else if (!child.isLeftChild()) {
+      leftRotate(child, parent);
+    } else {
+      // Throw exception if child is neither the left or right of given parent
+      throw new IllegalArgumentException();
     }
   }
 
   /**
-   * Replaces the right child of a given parent node to a different child node
+   * Performs the right rotation of given child and parent
    * 
-   * @param parent   - the given parent node
-   * @param newChild - the node to replace with
+   * @param child
+   * @param parent
    */
-  private void replaceRightChild(Node<T> parent, Node<T> newChild)
-  {
-    if(parent != null)
-    {
-      parent.rightChild = newChild;
-      newChild.parent = parent;
+  private void rightRotate(Node<T> child, Node<T> parent) {
+    Node<T> grandParent = parent.parent;
+    
+    // When parent is the root node
+    if (grandParent == null) {
+      this.root = child;
     }
+    // When parent is the left child of grandparent
+    else if (parent.isLeftChild()) {
+      grandParent.leftChild = child;
+    }
+    // When parent is the right child of grandparent
+    else {
+      grandParent.rightChild = child;
+    }
+    parent.leftChild = child.rightChild;
+    if (child.rightChild != null) {
+      child.rightChild.parent = child.parent;
+    }
+    parent.parent = child;
+    child.rightChild = parent;
+    child.parent = grandParent;
+    
+    return;
   }
 
   /**
-   * Gets the grandparent reference for a given node
+   * Performs the left rotation of given child and parent
    * 
-   * @param node - the given node
-   * @return the grandparent node of the given node, null if does not exist
+   * @param child
+   * @param parent
    */
-  private Node<T> getGrandparent(Node<T> node)
-  {
-    if(node.parent == null)
-      return null;
-    return node.parent.parent;
+  private void leftRotate(Node<T> child, Node<T> parent) {
+    Node<T> grandParent = parent.parent;
+    
+    // When parent is the root node
+    if (grandParent == null) {
+      this.root = child;
+    }
+    // When parent is the left child of grandparent
+    else if (parent.isLeftChild()) {
+      grandParent.leftChild = child;
+    }
+    // When parent is the right child of grandparent
+    else {
+      grandParent.rightChild = child;
+    }
+    parent.rightChild = child.leftChild;
+    if (child.leftChild != null) {
+      child.leftChild.parent = child.parent;
+    }
+    parent.parent = child;
+    child.leftChild = parent;
+    child.parent = grandParent;
+    
+    return;
   }
 
-  /**
-   * Gets the uncle reference for a given node
-   * 
-   * @param node - the given node
-   * @return the uncle node for the given node, null if does not exist
-   */
-  private Node<T> getUncle(Node<T> node)
-  {
-    Node<T> grandparent = getGrandparent(node);
-    if(grandparent == null)
-      return null;
-    if(node.parent.equals(grandparent.leftChild))
-      return grandparent.rightChild;
-    else
-      return grandparent.leftChild;
-  }
 }

@@ -14,42 +14,42 @@ import java.util.*;
  */
 public class Wrangle {
 
-	String filename;
-	File file;
-	Scanner input;
-	String data;
+  String filename;
+  File file;
+  Scanner input;
+  String data;
 
-	public Wrangle(String filename) throws FileNotFoundException {
-		this.filename = filename;
-		file = new File(filename);
-		input = new Scanner(file);
-		data = input.next(); // Avoids header column
-	}
+  public Wrangle(String filename) throws FileNotFoundException {
+    this.filename = filename;
+    file = new File(filename);
+    input = new Scanner(file);
+    data = input.next(); // Avoids header column
+  }
 
-	/**
-	 * The load function extracts data from the csv file.
-	 * 
-	 * @return Record object
-	 */
-	public Record nextCourse() {
+  /**
+   * The load function extracts data from the csv file.
+   * 
+   * @return Record object
+   */
+  public Record nextCourse() {
 
-		Record temp;
-		try {
-			data = input.next();
-			String[] cols = data.split(",");
-			temp = new Record(Integer.parseInt(cols[0]), cols[1]); // Instantiating records object
-			return temp;
+    Record temp;
+    try {
+      data = input.next();
+      String[] cols = data.split(",");
+      temp = new Record(Integer.parseInt(cols[0]), cols[1]); // Instantiating records object
+      return temp;
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
 
-	}
-	
-	public boolean hasNextCourse()
-	{
-	  return this.input.hasNext();
-	}
+  }
+  
+  public boolean hasNextCourse()
+  {
+    return this.input.hasNext();
+  }
 
 }
