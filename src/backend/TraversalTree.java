@@ -1,7 +1,21 @@
+// --== CS400 File Header Information ==--
+// Name: Ryan Almizyed
+// Email: almizyed@wisc.edu
+// Team: MG
+// Role: Backend
+// TA: Harit
+// Lecturer: Florian
+// Notes to Grader: <optional extra notes>
 package backend;
 
 import data_wrangling.*;
 
+/**
+ * An extension of the RedBlackTree in order to implement traversal functionality + get
+ * and contains methods
+ * 
+ * @author Ryan Almizyed
+ */
 public class TraversalTree extends RedBlackTree<Record>
 {
   /**

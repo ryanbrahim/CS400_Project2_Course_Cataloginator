@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name: Ryan Almizyed
+// Email: almizyed@wisc.edu
+// Team: MG
+// Role: Backend
+// TA: Harit
+// Lecturer: Florian
+// Notes to Grader: <optional extra notes>
 package backend;
 
 /**
