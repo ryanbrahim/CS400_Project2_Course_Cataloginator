@@ -9,8 +9,6 @@
 package backend;
 
 import java.io.FileNotFoundException;
-import backend.RedBlackTree.Node;
-import backend.TraversalTree.Traverser;
 import data_wrangling.*;
 
 /**
@@ -56,16 +54,19 @@ public class CourseCatalog implements Catalog<Integer, Record>
    * @param courseNumber - the given courseNumber
    * @returns the corresponding Course, null if does not exist in catalog
    */
-  @Override
   public Record get(Integer courseNumber)
   {
-    
     return tree.get(courseNumber);
   }
   
+  /**
+   * Checks if there is a course for the corresponding courseNumber.
+   * 
+   * @param courseNumber - the given courseNumber to search for
+   * @return true if Course exists, false if not
+   */
   public boolean contains(Integer courseNumber)
   {
-    
     return tree.contains(courseNumber);
   }
 
@@ -99,7 +100,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
    * 
    * @param t the traverser to do the traversal with
    */
-  public void inOrderTraversal(Traverser t)
+  public void inOrderTraversal(Traverser<Integer, Record> t)
   {
     tree.inOrderTraversal(t);
   }

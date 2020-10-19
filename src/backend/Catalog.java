@@ -8,8 +8,6 @@
 // Notes to Grader: <optional extra notes>
 package backend;
 
-import backend.TraversalTree.Traverser;
-
 /**
  * Defines an interface for accessing a catalog
  * 
@@ -43,6 +41,22 @@ public interface Catalog<K,V>
    * 
    * @param t the traverser to do the traversal with
    */
-  public void inOrderTraversal(Traverser t);
+  public void inOrderTraversal(Traverser<K,V> t);
+  
+  /**
+   * Interface for a traverser over this tree
+   */
+  public static interface Traverser<K,V>
+  {
+
+    /**
+     * Method that is called for every visited node.
+     * 
+     * @param key   the key stored in the visited node
+     * @param value the value stored in the visited node
+     */
+    public void visit(K key, V value);
+
+  }
 
 }

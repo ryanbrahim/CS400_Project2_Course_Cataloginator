@@ -8,6 +8,7 @@
 // Notes to Grader: <optional extra notes>
 package backend;
 
+import backend.Catalog.Traverser;
 import data_wrangling.*;
 
 /**
@@ -17,28 +18,14 @@ import data_wrangling.*;
  */
 public class TraversalTree extends RedBlackTree<Record>
 {
-  /**
-   * Interface for a traverser over this tree
-   */
-  public static interface Traverser
-  {
 
-    /**
-     * Method that is called for every visited node.
-     * 
-     * @param key   the key stored in the visited node
-     * @param value the value stored in the visited node
-     */
-    public void visit(Integer courseNumber, Record course);
-
-  }
   
   /**
    * Starts an in-order traversal of the tree.
    * 
    * @param t the traverser to do the traversal with
    */
-  public void inOrderTraversal(Traverser t)
+  public void inOrderTraversal(Traverser<Integer, Record> t)
   {
     this.inOrderTraversal(this.root, t);
   }
@@ -50,7 +37,7 @@ public class TraversalTree extends RedBlackTree<Record>
    * @param n the node that is currently visited
    * @param t the traverser to do the traversal with
    */
-  private void inOrderTraversal(Node<Record> n, Traverser t)
+  private void inOrderTraversal(Node<Record> n, Traverser<Integer, Record> t)
   {
     if(n != null)
     {
