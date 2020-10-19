@@ -11,7 +11,6 @@ package frontend;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import backend.CourseCatalog;
-import backend.TraversalTree;
 
 /**
  * This is the driver for the Course Catalog Program, allows user interaction with accessing CS
