@@ -12,17 +12,14 @@ import data_wrangling.*;
 
 /**
  * An extension of the RedBlackTree in order to implement traversal functionality + get
- * and contains methods
+ * 
  * 
  * @author Ryan Almizyed
  */
 public class TraversalTree extends RedBlackTree<Record>
 {
   /**
-   * Interface for
-   * 
-   * @param <K> the key type that the traverser works with
-   * @param <V> the value type that the traverser works with
+   * Interface for a traverser over this tree
    */
   public static interface Traverser
   {
