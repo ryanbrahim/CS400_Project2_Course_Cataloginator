@@ -9,7 +9,7 @@
 package backend;
 
 import backend.Catalog.Traverser;
-import data_wrangling.*;
+import data_wrangling.Record;
 
 /**
  * An extension of the RedBlackTree in order to implement traversal + get + contains functionality
