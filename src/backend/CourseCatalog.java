@@ -21,7 +21,7 @@ import data_wrangling.*;
 public class CourseCatalog implements Catalog<Integer, Record> 
 {  
   
-  public TraversalTree tree;
+  private TraversalTree tree;
   private int size;
   
   public CourseCatalog(String filename) throws FileNotFoundException
@@ -92,6 +92,16 @@ public class CourseCatalog implements Catalog<Integer, Record>
   public int getSize()
   {
     return this.size;
+  }
+  
+  /**
+   * Starts an in-order traversal of the tree.
+   * 
+   * @param t the traverser to do the traversal with
+   */
+  public void inOrderTraversal(Traverser t)
+  {
+    tree.inOrderTraversal(t);
   }
   
   /**

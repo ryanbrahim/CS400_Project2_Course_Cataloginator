@@ -45,7 +45,7 @@ public class TraversalTree extends RedBlackTree<Record>
   }
 
   /**
-   * Helper method that traverses the tree recursively in inorder and calls the traverser for every
+   * Helper method that traverses the tree recursively in in-order and calls the traverser for every
    * node.
    * 
    * @param n the node that is currently visited

@@ -193,7 +193,7 @@ public class CourseCataloginatorDriver {
     // prints all of the course's numbers
     System.out.println();
     System.out.println("Course Number List: ");
-    catalog.tree.inOrderTraversal((courseNum, course) -> {
+    catalog.inOrderTraversal((courseNum, course) -> {
       System.out.print(courseNum + " - ");
     });
     System.out.println();
@@ -215,7 +215,7 @@ public class CourseCataloginatorDriver {
 
     // prints course # and course description
     System.out.println();
-    catalog.tree.inOrderTraversal((courseNum, course) -> {
+    catalog.inOrderTraversal((courseNum, course) -> {
       if (courseNum <= upperBound && courseNum >= lowerBound) {
         System.out.println(courseNum + " " + course.description);
       }
