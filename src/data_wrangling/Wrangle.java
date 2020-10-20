@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name: Neil Bhutada
+// Email: nbhutada@wisc.edu
+// Team: MG
+// Role: Data Wrangler
+// TA: Harit
+// Lecturer: Florian
+// Notes to Grader: <optional extra notes>
 package data_wrangling;
 
 import java.io.File;
@@ -46,6 +54,10 @@ public class Wrangle {
     }
 
   }
+  /**
+	 * 
+	 * @return True when there is another entry in the list and False for vice versa.
+	 */
   
   public boolean hasNextCourse()
   {
