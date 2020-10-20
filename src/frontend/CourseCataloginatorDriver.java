@@ -39,9 +39,6 @@ public class CourseCataloginatorDriver {
     Scanner intScanner = new Scanner(System.in);
     catalog = new CourseCatalog(fileName);
 
-    // check whether the input is a string or number
-    boolean isCourseNum = true;
-
     System.out.println("Welcome to the Course Catalog!");
     printUserCommands();
 
@@ -136,6 +133,7 @@ public class CourseCataloginatorDriver {
 
     // closing program
     scanner.close();
+    intScanner.close();
     System.out.println();
     System.out.println("Thank you so very much for using The Course Catalog, "
         + "we will forever be indebted to you. ");
