@@ -1,14 +1,12 @@
 // --== CS400 File Header Information ==--
-// Name: Prannav Arora
-// Email: parora9@wisc.edu
+// Name: Ryan Almizyed
+// Email: almizyed@wisc.edu
 // Team: MG
+// Role: Backend
 // TA: Harit
-// Lecturer: Gary
+// Lecturer: Florian
 // Notes to Grader: <optional extra notes>
 
-package testing;
-
-import backend.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.FileNotFoundException;
 import org.junit.jupiter.api.Test;
