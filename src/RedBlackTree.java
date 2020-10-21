@@ -272,12 +272,16 @@ public class RedBlackTree<T extends Comparable<T>>
       enforceRBTreePropertiesAfterInsert(grandparent);
       return;
     }
-    /* CASE: node is parent's right child, and parent is grandparent's 
-     * left child => rotate left at parent */
+    /*
+     * CASE: node is parent's right child, and parent is grandparent's left child => rotate left at
+     * parent
+     */
     if(node.equals(parent.rightChild) && parent.equals(grandparent.leftChild))
       rotate(node, parent);
-    /* CASE: node is parent's left child, and parent is grandparent's 
-     * right child => rotate right at parent */
+    /*
+     * CASE: node is parent's left child, and parent is grandparent's right child => rotate right at
+     * parent
+     */
     else if(node.equals(parent.leftChild) && parent.equals(grandparent.rightChild))
       rotate(node, parent);
     // Color parent black and grandparent red

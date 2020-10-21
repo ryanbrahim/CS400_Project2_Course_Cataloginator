@@ -15,12 +15,12 @@ import java.io.FileNotFoundException;
  * 
  * @author Ryan Almizyed
  */
-public class CourseCatalog implements Catalog<Integer, Record> 
-{  
-  
+public class CourseCatalog implements Catalog<Integer, Record>
+{
+
   private TraversalTree tree;
   private int size;
-  
+
   public CourseCatalog(String filename) throws FileNotFoundException
   {
     Wrangle data = new Wrangle(filename);
@@ -30,6 +30,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
 
   /**
    * Inserts a given key/value into the catalog
+   * 
    * @returns true if successfully inserted, false if it is a duplicate
    */
   @Override
@@ -39,7 +40,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
     {
       tree.insert(course);
     }
-    catch(Exception e)
+    catch (Exception e)
     {
       e.printStackTrace();
       return false;
@@ -57,7 +58,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
   {
     return tree.get(courseNumber);
   }
-  
+
   /**
    * Checks if there is a course for the corresponding courseNumber.
    * 
@@ -71,19 +72,20 @@ public class CourseCatalog implements Catalog<Integer, Record>
 
   /**
    * Helper method to iterates through file, inserts into RBTree
+   * 
    * @param data - Wrangle object
    */
   private void load(Wrangle data)
   {
     Record nextCourse = null;
-    while(data.hasNextCourse())
+    while (data.hasNextCourse())
     {
       nextCourse = data.nextCourse();
       tree.insert(nextCourse);
       this.size++;
     }
   }
-  
+
   /**
    * Getter method for the size of the CourseCatalog
    * 
@@ -93,7 +95,7 @@ public class CourseCatalog implements Catalog<Integer, Record>
   {
     return this.size;
   }
-  
+
   /**
    * Starts an in-order traversal of the tree.
    * 
@@ -103,9 +105,10 @@ public class CourseCatalog implements Catalog<Integer, Record>
   {
     tree.inOrderTraversal(t);
   }
-  
+
   /**
    * Main method to run some small tests
+   * 
    * @param args
    */
   public static void main(String[] args)
@@ -120,9 +123,9 @@ public class CourseCatalog implements Catalog<Integer, Record>
     {
       e.printStackTrace();
     }
-    
-    
+
+
   }
-  
+
 
 }

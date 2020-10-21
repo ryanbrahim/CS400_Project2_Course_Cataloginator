@@ -1,10 +1,10 @@
 // --== CS400 File Header Information ==--
-// Name: Ryan Almizyed
-// Email: almizyed@wisc.edu
+// Name: Bailey Hurlburt
+// Email: bhurlburt@wisc.edu
 // Team: MG
-// Role: Backend
+// Role: Front End Developer
 // TA: Harit
-// Lecturer: Florian
+// Lecturer: Gary Dahl
 // Notes to Grader: <optional extra notes>
 
 
@@ -18,7 +18,8 @@ import java.util.Scanner;
  * @author Bailey
  *
  */
-public class CourseCataloginatorDriver {
+public class CourseCataloginatorDriver
+{
   // Constants
   private static final String[] userCommands = {"all courses", "courses at level", "help", "exit"}; // possible
                                                                                                     // commands
@@ -32,7 +33,8 @@ public class CourseCataloginatorDriver {
    * @param args
    * @throws FileNotFoundException
    */
-  public static void main(String args[]) throws FileNotFoundException {
+  public static void main(String args[]) throws FileNotFoundException
+  {
 
     Scanner scanner = new Scanner(System.in);
     Scanner intScanner = new Scanner(System.in);
@@ -42,7 +44,8 @@ public class CourseCataloginatorDriver {
     printUserCommands();
 
     // User input loop
-    while (true) {
+    while (true)
+    {
       // get user's command
       String inputCommand = scanner.nextLine().toLowerCase().trim();
 
@@ -50,15 +53,20 @@ public class CourseCataloginatorDriver {
       isInteger(inputCommand);
 
       // exit command
-      if (inputCommand.equals("exit")) {
+      if(inputCommand.equals("exit"))
+      {
         break;
       }
 
       // get specific course info command
-      else if (isInteger(inputCommand)) {
-        if (catalog.contains(Integer.parseInt(inputCommand))) {
+      else if(isInteger(inputCommand))
+      {
+        if(catalog.contains(Integer.parseInt(inputCommand)))
+        {
           printCourseInfo(Integer.parseInt(inputCommand));
-        } else {
+        }
+        else
+        {
           // invalid course number
           System.out.println();
           System.out
@@ -69,27 +77,32 @@ public class CourseCataloginatorDriver {
       }
 
       // help command
-      else if (inputCommand.equals("help")) {
+      else if(inputCommand.equals("help"))
+      {
         printUserCommands();
       }
 
       // print out all CS courses command
-      else if (inputCommand.equals("all courses")) {
+      else if(inputCommand.equals("all courses"))
+      {
         printAllCourseNumbers();
       }
 
       // print out courses based on given bounds
-      else if (inputCommand.equals("courses at level")) {
+      else if(inputCommand.equals("courses at level"))
+      {
 
         String lowerBound = null;
         String upperBound = null;
 
         // retrieve user inputted lower bound
         System.out.print("Enter the lower bound: ");
-        while (!isInteger(lowerBound)) {
+        while (!isInteger(lowerBound))
+        {
 
           // check if the next input is an integer, if not continue loop
-          if (intScanner.hasNextInt()) {
+          if(intScanner.hasNextInt())
+          {
             lowerBound = intScanner.nextLine();
             break;
           }
@@ -97,13 +110,15 @@ public class CourseCataloginatorDriver {
           System.out.print("Given input is not a valid integer, please re-enter an integer: ");
           lowerBound = intScanner.nextLine();
         }
-        
+
         // retrieve user inputted upper bound
         System.out.print("Enter the upper bound: ");
-        while (!isInteger(upperBound)) {
+        while (!isInteger(upperBound))
+        {
 
           // check if the next input is an integer, if not continue loop
-          if (intScanner.hasNextInt()) {
+          if(intScanner.hasNextInt())
+          {
             upperBound = intScanner.nextLine();
             break;
           }
@@ -111,10 +126,14 @@ public class CourseCataloginatorDriver {
           System.out.print("That input is not a valid integer, please re-enter an integer: ");
           upperBound = intScanner.nextLine();
         }
-        // call printCoursesAtLevel() if the given bounds are correct format, otherwise give error message
-        if (isInteger(lowerBound) && isInteger(upperBound)) {
+        // call printCoursesAtLevel() if the given bounds are correct format, otherwise give error
+        // message
+        if(isInteger(lowerBound) && isInteger(upperBound))
+        {
           printCoursesAtLevel(lowerBound, upperBound);
-        } else {
+        }
+        else
+        {
           System.out.println("Given input was incorrect, please try again with integers.");
           System.out.print(":");
         }
@@ -122,7 +141,8 @@ public class CourseCataloginatorDriver {
       }
 
       // invalid command
-      else {
+      else
+      {
         System.out.println();
         System.out.println("The command you entered is invalid. Type 'all courses' to see possible "
             + "courses, or 'help' to get a list of commands.");
@@ -144,11 +164,15 @@ public class CourseCataloginatorDriver {
    * @param input
    * @return true if input is an integer, false otherwise
    */
-  private static boolean isInteger(String input) {
-    try {
+  private static boolean isInteger(String input)
+  {
+    try
+    {
       Integer.parseInt(input);
       return true;
-    } catch (NumberFormatException e) {
+    }
+    catch (NumberFormatException e)
+    {
       return false;
     }
   }
@@ -157,7 +181,8 @@ public class CourseCataloginatorDriver {
    * Helper method to print out the potential user commands
    * 
    */
-  private static void printUserCommands() {
+  private static void printUserCommands()
+  {
     System.out.println();
     System.out.println("Possible commands: ");
     System.out.println(":input a specific CS course number ");
@@ -174,7 +199,8 @@ public class CourseCataloginatorDriver {
    * 
    * @param courseNum - the int number of the course
    */
-  private static void printCourseInfo(int courseNum) {
+  private static void printCourseInfo(int courseNum)
+  {
     System.out.println();
     System.out.println(catalog.get(courseNum).description);
     System.out.print(":");
@@ -184,7 +210,8 @@ public class CourseCataloginatorDriver {
    * Helper method to print out all of the CS courses, formatted correctly
    * 
    */
-  private static void printAllCourseNumbers() {
+  private static void printAllCourseNumbers()
+  {
 
     // prints all of the course's numbers
     System.out.println();
@@ -203,7 +230,8 @@ public class CourseCataloginatorDriver {
    * @param oldLowerBound
    * @param oldUpperBound
    */
-  private static void printCoursesAtLevel(String userLowerBound, String userUpperBound) {
+  private static void printCoursesAtLevel(String userLowerBound, String userUpperBound)
+  {
 
     // parse the lower and upper bounds
     int lowerBound = Integer.parseInt(userLowerBound);
@@ -212,7 +240,8 @@ public class CourseCataloginatorDriver {
     // prints course # and course description
     System.out.println();
     catalog.inOrderTraversal((courseNum, course) -> {
-      if (courseNum <= upperBound && courseNum >= lowerBound) {
+      if(courseNum <= upperBound && courseNum >= lowerBound)
+      {
         System.out.println(courseNum + " " + course.description);
       }
     });

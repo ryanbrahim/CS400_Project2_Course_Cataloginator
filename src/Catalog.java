@@ -13,14 +13,15 @@
  * 
  * @author Ryan Almizyed
  */
-public interface Catalog<K,V>
+public interface Catalog<K, V>
 {
   /**
    * Inserts a given key/value into the catalog
+   * 
    * @returns true if successfully inserted, false if it is a duplicate
    */
   boolean insert(K key, V value);
-  
+
   /**
    * Gets the value for a corresponding key
    * 
@@ -28,25 +29,25 @@ public interface Catalog<K,V>
    * @returns the corresponding value, null if does not exist in catalog
    */
   V get(K key);
-  
+
   /**
    * 
    * @param key
    * @return true if the key
    */
   boolean contains(K key);
-  
+
   /**
    * Starts an in-order traversal of the tree.
    * 
    * @param t the traverser to do the traversal with
    */
-  public void inOrderTraversal(Traverser<K,V> t);
-  
+  public void inOrderTraversal(Traverser<K, V> t);
+
   /**
    * Interface for a traverser over this tree
    */
-  public static interface Traverser<K,V>
+  public static interface Traverser<K, V>
   {
 
     /**
